@@ -2,7 +2,14 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/msb-dongbao-api/msb-dongbao-cart-api/msb-dongbao-cart-api.iml" filepath="$PROJECT_DIR$/msb-dongbao-api/msb-dongbao-cart-api/msb-dongbao-cart-api.iml" />
       <module fileurl="file://$PROJECT_DIR$/msb-dongbao-api/msb-dongbao-cms-api/msb-dongbao-cms-api.iml" filepath="$PROJECT_DIR$/msb-dongbao-api/msb-dongbao-cms-api/msb-dongbao-cms-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/msb-dongbao-api/msb-dongbao-dictionary-api/msb-dongbao-dictionary-api.iml" filepath="$PROJECT_DIR$/msb-dongbao-api/msb-dongbao-dictionary-api/msb-dongbao-dictionary-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/msb-dongbao-api/msb-dongbao-oms-api/msb-dongbao-oms-api.iml" filepath="$PROJECT_DIR$/msb-dongbao-api/msb-dongbao-oms-api/msb-dongbao-oms-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/msb-dongbao-api/msb-dongbao-pay-api/msb-dongbao-pay-api.iml" filepath="$PROJECT_DIR$/msb-dongbao-api/msb-dongbao-pay-api/msb-dongbao-pay-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/msb-dongbao-api/msb-dongbao-pms-api/msb-dongbao-pms-api.iml" filepath="$PROJECT_DIR$/msb-dongbao-api/msb-dongbao-pms-api/msb-dongbao-pms-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/msb-dongbao-api/msb-dongbao-sms-api/msb-dongbao-sms-api.iml" filepath="$PROJECT_DIR$/msb-dongbao-api/msb-dongbao-sms-api/msb-dongbao-sms-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/msb-dongbao-api/msb-dongbao-ums-api/msb-dongbao-ums-api.iml" filepath="$PROJECT_DIR$/msb-dongbao-api/msb-dongbao-ums-api/msb-dongbao-ums-api.iml" />
     </modules>
   </component>
 </project>

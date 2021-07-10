@@ -21,10 +21,10 @@
         <module name="msb-dongbao-generator" />
         <module name="msb-dongbao-oms-api" />
         <module name="msb-dongbao-oms" />
-        <module name="msb-dongbao-pms-api" />
         <module name="msb-dongbao-dictionary" />
-        <module name="msb-dongbao-ums-api" />
+        <module name="msb-dongbao-pms-api" />
         <module name="msb-dongbao-cart-api" />
+        <module name="msb-dongbao-ums-api" />
         <module name="msb-dongbao-sms" />
         <module name="msb-dongbao-pms" />
         <module name="msb-dongbao-cms-api" />
