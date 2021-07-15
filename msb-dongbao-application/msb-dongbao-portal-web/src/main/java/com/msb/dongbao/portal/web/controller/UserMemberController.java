@@ -1,7 +1,10 @@
 package com.msb.dongbao.portal.web.controller;
 
 
+import com.msb.dongbao.common.base.annotations.TokenCheck;
 import com.msb.dongbao.common.base.result.ResultWrapper;
+import com.msb.dongbao.common.util.JwtUtil;
+import com.msb.dongbao.ums.entity.UmsMember;
 import com.msb.dongbao.ums.entity.dto.UmsMemberLoginParamDTO;
 import com.msb.dongbao.ums.entity.dto.UmsMemberRegisterParamDTO;
 import com.msb.dongbao.ums.service.UmsMemberService;
@@ -28,17 +31,27 @@ public class UserMemberController {
 
     @PostMapping("/register")
     public ResultWrapper register(@RequestBody @Valid UmsMemberRegisterParamDTO umsMemberRegisterParamDTO){
-        umsMemberService.register(umsMemberRegisterParamDTO);
-        return ResultWrapper.getSuccessBuilder().date(null).build();
+        return umsMemberService.register(umsMemberRegisterParamDTO);
     }
-
 
     @PostMapping("/login")
     public ResultWrapper login(@RequestBody UmsMemberLoginParamDTO umsMemberLoginParamDTO){
         return umsMemberService.login(umsMemberLoginParamDTO);
 
-
+    }
+    
+    @GetMapping("/verify")
+    public ResultWrapper verify(String token) {
+        System.out.println("正常业务");
+        return ResultWrapper.getSuccessBuilder().build();
     }
 
+
+    @PostMapping("/edit")
+    @TokenCheck
+    public ResultWrapper edit(@RequestBody UmsMember umsMember) {
+        System.out.println("edit");
+        return umsMemberService.edit(umsMember);
+    }
 
 }

@@ -2,12 +2,13 @@ package com.msb.dongbao.ums.service.impl;
 
 import com.msb.dongbao.common.base.enums.StateCodeEnum;
 import com.msb.dongbao.common.base.result.ResultWrapper;
+import com.msb.dongbao.common.util.JwtUtil;
+import com.msb.dongbao.ums.entity.UserMemberLoginResponse;
 import com.msb.dongbao.ums.entity.dto.UmsMemberLoginParamDTO;
 import com.msb.dongbao.ums.entity.dto.UmsMemberRegisterParamDTO;
 import com.msb.dongbao.ums.service.UmsMemberService;
 import com.msb.dongbao.ums.entity.UmsMember;
 import com.msb.dongbao.ums.mapper.UmsMemberMapper;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -48,22 +49,27 @@ public class UmsMemberServiceImpl implements UmsMemberService {
         if(null != umsMember) {
             String passwordDb = umsMember.getPassword();
             if(!passwordEncoder.matches(umsMemberLoginParamDTO.getPassword(),passwordDb)){
-                return ResultWrapper.getFailBuilder().code(StateCodeEnum.PASSWORD_ERROR.getCode()).msg(StateCodeEnum.PASSWORD_ERROR.getMsg()).build();
+                return ResultWrapper.builder().code(StateCodeEnum.PASSWORD_ERROR.getCode()).msg(StateCodeEnum.PASSWORD_ERROR.getMsg()).build();
             }
         } else {
-            return ResultWrapper.getFailBuilder().code(StateCodeEnum.USER_EMPTY.getCode()).msg(StateCodeEnum.USER_EMPTY.getMsg()).build();
+            return ResultWrapper.builder().code(StateCodeEnum.USER_EMPTY.getCode()).msg(StateCodeEnum.USER_EMPTY.getMsg()).build();
+
         }
 
-//        String token = JwtUtil.createToken(umsMember.getId()+"");
-//
-//        UserMemberLoginResponse userMemberLoginResponse = new UserMemberLoginResponse();
-//        userMemberLoginResponse.setToken(token);
-//
-//        umsMember.setPassword("");
-//        userMemberLoginResponse.setUmsMember(umsMember);
-        return ResultWrapper.getSuccessBuilder().build();
+        String token = JwtUtil.createToken(umsMember.getUsername()+"");
 
+        UserMemberLoginResponse userMemberLoginResponse = new UserMemberLoginResponse();
+        userMemberLoginResponse.setToken(token);
+
+        umsMember.setPassword("");
+        userMemberLoginResponse.setUmsMember(umsMember);
+        return ResultWrapper.getSuccessBuilder().date(userMemberLoginResponse).build();
     }
 
+    @Override
+    public ResultWrapper edit(UmsMember umsMember) {
+        umsMemberMapper.updateById(umsMember);
+        return ResultWrapper.getSuccessBuilder().date(umsMember).build();
+    }
 
 }

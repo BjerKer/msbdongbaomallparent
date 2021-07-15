@@ -18,4 +18,6 @@ public interface UmsMemberService{
     public ResultWrapper register(UmsMemberRegisterParamDTO umsMemberRegisterParamDTO);
 
     public ResultWrapper login(UmsMemberLoginParamDTO umsMemberLoginParamDTO);
+
+    public ResultWrapper edit(UmsMember umsMember);
 }
