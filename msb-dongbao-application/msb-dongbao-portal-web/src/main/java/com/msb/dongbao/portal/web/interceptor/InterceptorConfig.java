@@ -13,13 +13,14 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class InterceptorConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(authInterceptor())
-                .excludePathPatterns("/user-member/login")
-                .excludePathPatterns("/code/**")
-                .excludePathPatterns("/jcaptcha/**")
-                .excludePathPatterns("/happy-captcha/**")
-                .excludePathPatterns("/easy-captcha/**")
-                .addPathPatterns("/**");
+//        registry.addInterceptor(authInterceptor())
+//                .excludePathPatterns("/user-member/login")
+//                .excludePathPatterns("/code/**")
+//                .excludePathPatterns("/jcaptcha/**")
+//                .excludePathPatterns("/happy-captcha/**")
+//                .excludePathPatterns("/easy-captcha/**")
+//                .excludePathPatterns("/kcaptcha/**")
+//                .addPathPatterns("/**");
     }
 
     @Bean

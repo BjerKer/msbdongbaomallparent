@@ -2,18 +2,18 @@ package com.msb.dongbao.portal.web.controller;
 
 import com.msb.dongbao.common.base.annotations.TokenCheck;
 import com.ramostear.captcha.HappyCaptcha;
-import com.ramostear.captcha.support.CaptchaStyle;
+import com.wf.captcha.ArithmeticCaptcha;
 import com.wf.captcha.SpecCaptcha;
 import com.wf.captcha.utils.CaptchaUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -27,7 +27,14 @@ public class EasyCaptchaController {
     @TokenCheck(required = false)
     public void generator(HttpServletRequest request, HttpServletResponse response){
         try {
-            CaptchaUtil.out(request,response);
+//            CaptchaUtil.out(request,response);
+
+            //math
+            ArithmeticCaptcha arithmeticCaptcha = new ArithmeticCaptcha(200 ,50);
+            arithmeticCaptcha.setLen(3);
+
+            CaptchaUtil.out(arithmeticCaptcha,request,response);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -48,28 +55,32 @@ public class EasyCaptchaController {
 
     @GetMapping("/generator-redis")
     @TokenCheck(required = false)
-    public void generatorRedis(HttpServletRequest request, HttpServletResponse response){
-        try {
-            SpecCaptcha specCaptcha = new SpecCaptcha(100, 50);
-            String text = specCaptcha.text();
-            System.out.println("验证码" + text);
+    public Map<String, String> generatorRedis(HttpServletRequest request, HttpServletResponse response){
 
-            String s = request.getSession().getId();
-            stringRedisTemplate.opsForValue().set(s,text);
+        SpecCaptcha specCaptcha = new SpecCaptcha(100, 50);
+        String text = specCaptcha.text();
+        System.out.println("验证码" + text);
+
+        String uuid = UUID.randomUUID().toString();
+        stringRedisTemplate.opsForValue().set(uuid,text);
+
+        String s1 = specCaptcha.toBase64();
 
 
+        Map<String,String> map = new HashMap<>();
+        map.put("uuid",uuid);
+        map.put("base64",s1);
 
-            CaptchaUtil.out(specCaptcha,request,response);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        return map;
+
     }
 
     @GetMapping("/verify-redis")
     @TokenCheck(required = false)
-    public String verifyRedis(String verifyCode, HttpServletRequest request) {
-        String s = request.getSession().getId();
-        String c = stringRedisTemplate.opsForValue().get(s);
+    public String verifyRedis(String verifyCode, @RequestBody Map<String,String> map) {
+        String uuid = map.get("uuid");
+        String c = stringRedisTemplate.opsForValue().get(uuid);
+        System.out.println(uuid);
         if (verifyCode.equals(c)) {
             return "校验通过";
         }
