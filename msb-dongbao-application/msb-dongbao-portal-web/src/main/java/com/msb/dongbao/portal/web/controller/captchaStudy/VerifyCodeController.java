@@ -1,4 +1,4 @@
-package com.msb.dongbao.portal.web.controller;
+package com.msb.dongbao.portal.web.controller.captchaStudy;
 
 import com.msb.dongbao.common.base.annotations.TokenCheck;
 import com.msb.dongbao.portal.web.code.ImageCode;

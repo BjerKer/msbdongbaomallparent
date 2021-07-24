@@ -53,7 +53,6 @@ public class UmsMemberServiceImpl implements UmsMemberService {
             }
         } else {
             return ResultWrapper.builder().code(StateCodeEnum.USER_EMPTY.getCode()).msg(StateCodeEnum.USER_EMPTY.getMsg()).build();
-
         }
 
         String token = JwtUtil.createToken(umsMember.getUsername()+"");
